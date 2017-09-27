@@ -2,10 +2,11 @@ FROM alpine:latest
 
 MAINTAINER gael.mauleon@gmail.com
 
-ENV SQUID_LOG_DIR /var/log/squid
-ENV SQUID_CACHE_DIR /var/cache/squid
+RUN apk update && apk add squid && apk add sudo && rm -rf /var/cache/apk/*
 
-RUN apk update && apk add squid && rm -rf /var/cache/apk/*
+RUN echo "squid ALL=(ALL) NOPASSWD: /bin/chown -R squid\:squid /var/log/squid, /bin/chown -R squid\:squid /var/cache/squid" >> /etc/sudoers.d/squid && \
+    echo "Defaults:squid !requiretty" >> /etc/sudoers.d/squid && \
+    chmod 440 /etc/sudoers.d/squid
 
 COPY squid.conf /etc/squid/squid.conf
 

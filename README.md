@@ -22,8 +22,6 @@ docker run -d --name squid -p 3128:3128 --restart=always \
   -v /host/var/cache/squid:/var/cache/squid \
   gmauleon/squid
 ```
-Or change the cache and log directory completely by specifying the environment variables `SQUID_LOG_DIR` and `CACHE_LOG_DIR`  
-Note that you will also have to change the squid configuration to match your variables, those are only used to ensure squid has the correct access via the docker-entrypoint.sh
 
 ## Tips
 
